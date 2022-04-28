@@ -1,0 +1,148 @@
+<html lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui,viewport-fit=cover">
+    <meta name="apple-mobile/src-web-app-capable" content="yes">
+    <meta name="apple-mobile/src-web-app-status-bar-style" content="black">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>外出登记二维码</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+    <div id="app" data-v-app="">
+        <div id="app">
+            <div class="page-container" data-v-fae8cc3a="">
+                <div class="timer" data-v-fae8cc3a="" id="times"></div>
+                <div class="ex-qrcode center qrcode" width="180" height="180" data-v-544d011e="" data-v-fae8cc3a="">
+                    <img src="green.png" style="height: 120px; width: 120px;">
+                </div>
+                <div class="van-cell-group__title">外出时间</div>
+                <div class="van-cell-group van-hairline--top-bottom mg-b">
+                    <div class="van-cell van-cell--large" data-v-fae8cc3a="">
+                        <!---->
+                        <div class="van-cell__title"><span>离校时间</span>
+                            <!---->
+                        </div>
+                        <div class="van-cell__value"><span class="text-black" data-v-fae8cc3a=""
+                                style="font-weight: bold;" id="outer">2021-09-15 17:29</span></div>
+                        <!---->
+                        <!---->
+                    </div>
+                    <div class="van-cell van-cell--large" data-v-fae8cc3a="">
+                        <!---->
+                        <div class="van-cell__title"><span>回校时间</span>
+                            <!---->
+                        </div>
+                        <div class="van-cell__value"><span class="text-black" data-v-fae8cc3a=""
+                                style="font-weight: bold;" id="back">2021-09-15 17:59</span></div>
+                        <!---->
+                        <!---->
+                    </div>
+                </div>
+                <div class="van-cell-group__title">学生信息</div>
+                <div class="van-cell-group van-hairline--top-bottom">
+                    <div class="van-cell" data-v-fae8cc3a="">
+                        <!---->
+                        <div class="van-cell__title"><span>姓名</span>
+                            <!---->
+                        </div>
+                        <div class="van-cell__value"><input id="name" oninput="getName()" style="text-align: right;border: none;padding: 0;">潘杰</input></div>
+                        <!---->
+                        <!---->
+                    </div>
+                    <div class="van-cell" data-v-fae8cc3a="">
+                        <!---->
+                        <div class="van-cell__title"><span >学号</span>
+                            <!---->
+                        </div>
+                        <div class="van-cell__value"><input id="sno" oninput="getSno()" style="text-align: right;border: none;padding: 0;">3118003990</input></div>
+                        <!---->
+                        <!---->
+                    </div>
+                    <div class="van-cell" data-v-fae8cc3a="">
+                        <!---->
+                        <div class="van-cell__title"><span>学院</span>
+                            <!---->
+                        </div>
+                        <div class="van-cell__value"><span>管理学院</span></div>
+                        <!---->
+                        <!---->
+                    </div>
+                    <div class="van-cell" data-v-fae8cc3a="">
+                        <!---->
+                        <div class="van-cell__title"><span>专业</span>
+                            <!---->
+                        </div>
+                        <div class="van-cell__value"><span>信息管理与信息系统</span></div>
+                        <!---->
+                        <!---->
+                    </div>
+                    <div class="van-cell" data-v-fae8cc3a="">
+                        <!---->
+                        <div class="van-cell__title"><span>班级</span>
+                            <!---->
+                        </div>
+                        <div class="van-cell__value"><span>信息管理与信息系统(4)</span></div>
+                        <!---->
+                        <!---->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+     document.getElementById("name").value=sessionStorage.getItem("name")||""
+     document.getElementById("sno").value=sessionStorage.getItem("sno")||""
+    function getDate() {
+        //获取当前时间
+        var date = new Date();
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        h = h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        var second = date.getSeconds();
+        second = second < 10 ? ('0' + second) : second;
+        date1 = y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+        //获取div
+        var div1 = document.getElementById("times");
+        // //将时间写入div
+        div1.innerHTML = date1;
+    }
+    getDate()
+    //使用定时器每秒向div写入当前时间
+    setInterval("getDate()", 1000);
+    function getOuterandBack() {
+        var date = new Date();
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        outerTime = y + '-' + m + '-' + d + ' ' + '08:30'
+        backTime = y + '-' + m + '-' + d + ' ' + '23:30'
+        var outer = document.getElementById("outer")
+        var back = document.getElementById("back")
+        outer.innerHTML = outerTime
+        back.innerHTML = backTime
+    }
+    getOuterandBack()
+    
+    // let name = prompt("姓名", "")
+    // let id = prompt("学号", "")
+    // var n = document.getElementById("name")
+    // var c = document.getElementById("card")
+    // n.innerHTML = name
+    // c.innerHTML = id
+</script>
